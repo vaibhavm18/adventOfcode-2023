@@ -3,7 +3,6 @@ package day1
 import (
 	"bufio"
 	"fmt"
-	"os"
 	"strconv"
 )
 
@@ -21,20 +20,9 @@ func InitializeNumberMap() map[string]string {
 	}
 }
 
-func Answer() {
-	file, err := os.Open("input/main.txt")
-
-	if err != nil {
-		fmt.Println("error", err)
-		return
-	}
-
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-
-	ans := 0
+func Answer(scanner *bufio.Scanner) {
 	numMap := InitializeNumberMap()
+	ans := 0
 	for scanner.Scan() {
 		line := scanner.Text()
 		res := numInStr(line, &numMap)
