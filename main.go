@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/vaibhavm18/adventOfcode-2023/internal/day2"
+	"github.com/vaibhavm18/adventOfcode-2023/internal/day3"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 	}
 
 	defer file.Close()
-	ans := day2.Answer(scanner)
+	ans := day3.Sol(scanner)
 	fmt.Println(ans)
 }
 
