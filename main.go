@@ -5,11 +5,16 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/vaibhavm18/adventOfcode-2023/internal/day3"
+	"github.com/vaibhavm18/adventOfcode-2023/internal/day4"
 )
 
 func main() {
-	filePath := "input/main.txt"
+	filePath := "input/test.txt"
+	input := os.Args[1:]
+
+	if len(input) > 0 && input[0] != "" {
+		filePath = fmt.Sprintf("input/%s.txt", input[0])
+	}
 	scanner, file, err := file(&filePath)
 	if err != nil {
 		fmt.Println("file error", err)
@@ -17,7 +22,7 @@ func main() {
 	}
 
 	defer file.Close()
-	ans := day3.Sol(scanner)
+	ans := day4.Answer(scanner)
 	fmt.Println(ans)
 }
 
