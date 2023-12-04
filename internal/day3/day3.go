@@ -43,17 +43,10 @@ type symbol struct {
 	Number []number
 }
 
-/*
-
-0 1 2  3
-4 5 6  7
-8 9 10 11
-
-*/
-
 func separateSymbols(mat *[][]rune) int {
 	var numList []number
 	var symbols []symbol
+	n := len((*mat)[0])
 	for i, row := range *mat {
 		numStr := ""
 		for j, char := range row {
@@ -83,6 +76,17 @@ func separateSymbols(mat *[][]rune) int {
 					symbols = append(symbols, sym)
 				}
 			}
+		}
+		if numStr != "" {
+			val, _ := strconv.Atoi(numStr)
+			num := number{
+				Val:   val,
+				Row:   i,
+				Start: n - len(numStr) - 1,
+				End:   n - 2,
+			}
+			numList = append(numList, num)
+			numStr = ""
 		}
 	}
 
