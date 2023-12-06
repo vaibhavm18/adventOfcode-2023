@@ -2,6 +2,7 @@ package day4
 
 import (
 	"bufio"
+	"fmt"
 	"math"
 	"strconv"
 	"strings"
@@ -11,26 +12,46 @@ type Game struct {
 	Num   int
 	First []int
 	last  []int
+	win   int
 }
 
 func Answer(scanner *bufio.Scanner) int {
 
 	var gameList []Game
+	var card []int
 	ans := 0
 	for scanner.Scan() {
 		line := scanner.Text()
 		game := parseString(line)
 		gameList = append(gameList, game)
+		card = append(card, 1)
 	}
 
-	for _, game := range gameList {
+	for i, game := range gameList {
 		res := findMatch(&game.First, &game.last)
 		if res != 0 {
-			pow := math.Pow(2.0, float64(res-1))
-			ans += int(pow)
+			pow1 := math.Pow(2.0, float64(res-1))
+			ans += int(pow1)
+		}
+		gameRef := &gameList[i]
+		gameRef.win = res
+		for k := 0; k < card[i]; k++ {
+			l := i
+			for j := 0; j < res; j++ {
+				l += 1
+				card[l] = card[l] + 1
+			}
+
 		}
 	}
 
+	part2 := 0
+
+	for _, num := range card {
+		part2 += num
+	}
+
+	fmt.Println("part 2", part2)
 	return ans
 }
 
